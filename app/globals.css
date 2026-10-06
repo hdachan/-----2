@@ -42,6 +42,40 @@ address { font-style: normal; }
 .nav { display: flex; gap: 32px; font-weight: 600; font-size: 16px; color: #4a4a4a; }
 .nav a:hover { color: var(--primary); }
 
+/* 햄버거 버튼: 기본(PC)은 숨김 */
+.menu-btn {
+  display: none; position: relative; width: 40px; height: 40px; margin-right: -8px;
+  border: 0; background: none; cursor: pointer;
+}
+.menu-btn span {
+  position: absolute; left: 10px; width: 20px; height: 2px; border-radius: 2px; background: #4a4a4a;
+  transition: transform 0.25s ease, opacity 0.2s ease, top 0.25s ease;
+}
+.menu-btn span:nth-child(1) { top: 13px; }
+.menu-btn span:nth-child(2) { top: 19px; }
+.menu-btn span:nth-child(3) { top: 25px; }
+/* 열리면 ✕ 모양 */
+.header.is-menu-open .menu-btn span:nth-child(1) { top: 19px; transform: rotate(45deg); }
+.header.is-menu-open .menu-btn span:nth-child(2) { opacity: 0; }
+.header.is-menu-open .menu-btn span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
+
+/* 모바일(768px 이하): 메뉴를 햄버거 버튼 안으로 넣고, 누르면 상단바 아래로 펼침 */
+@media (max-width: 768px) {
+  .menu-btn { display: block; }
+  .header-inner { position: static; } /* 메뉴 판이 상단바 전체 폭 기준으로 펼쳐지게 */
+  .header-logo { left: 50%; top: 32px; } /* header-inner 가 기준이 아니게 돼서 로고 위치 보정 */
+  #main-nav {
+    position: absolute; top: 100%; left: 0; right: 0; /* 상단바(header) 기준 화면 폭 전체 */
+    background: #fff; border-bottom: 1px solid var(--line); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    visibility: hidden; opacity: 0; transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+  .header.is-menu-open #main-nav { visibility: visible; opacity: 1; transform: none; }
+  #main-nav .nav { flex-direction: column; gap: 0; padding: 8px 16px 16px; font-size: 17px; }
+  #main-nav .nav a { display: block; padding: 14px 8px; border-bottom: 1px solid #f0f0f0; }
+  #main-nav .nav li:last-child a { border-bottom: 0; }
+}
+
 /* 본문 */
 /* 첫 화면: 상단바를 뺀 나머지 화면을 꽉 채우고 가운데 정렬 */
 .hero {

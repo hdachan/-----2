@@ -5,7 +5,7 @@ const CONTACTS = [
   {
     title: "카카오톡 상담",
     desc: "채팅으로 편하게 물어보세요",
-    href: "#", // 카카오톡 채널 주소로 교체
+    href: "https://pf.kakao.com/_VsxgHn",
     external: true,
     icon: (
       <svg {...iconProps}>

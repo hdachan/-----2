@@ -4,7 +4,7 @@ import Logo from "./Logo";
 const QUICK_LINKS = [
   { href: "/support/terms/", label: "약관" },
   { href: "/support/notice/", label: "고객센터" },
-  { href: "#", label: "카카오톡", external: true }, // 카카오톡 채널 주소로 교체
+  { href: "https://pf.kakao.com/_VsxgHn", label: "카카오톡", external: true },
 ];
 
 const POLICY_LINKS = [
