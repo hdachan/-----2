@@ -15,7 +15,10 @@ export const metadata = {
     siteName: "올라!펫보험",
     title: "올라!펫보험",
     description: "우리 아이를 위한 반려동물 보험",
+    // 카카오톡·페이스북 등 링크 미리보기 이미지 (1200×630)
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "올라!펫보험" }],
   },
+  twitter: { card: "summary_large_image", images: ["/og-image.png"] },
   robots: { index: true, follow: true },
   // 구글 Search Console / 네이버 서치어드바이저에서 발급받은 코드로 교체
   verification: {
