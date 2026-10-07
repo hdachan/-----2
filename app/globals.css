@@ -897,3 +897,9 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
 @media (max-width: 768px) {
   .hero-eyebrow { font-weight: 400; }
 }
+
+/* 모바일 + 화면이 짧은 폰(세로 760px 미만): 고양이가 잘리므로 숨기고, 발자국은 카드 끝까지 */
+@media (max-width: 768px) and (max-height: 759px) {
+  .features-stage .features-cat { display: none; }
+  .features-stage .paw-trail { bottom: 6px; }
+}
