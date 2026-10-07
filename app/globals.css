@@ -972,7 +972,7 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
   position: fixed; right: 24px; bottom: 24px; z-index: 900;
   display: flex; align-items: center; justify-content: center;
   width: 60px; height: 60px; border-radius: 50%;
-  background: none; color: #fff; overflow: hidden; /* 버튼 전체를 프리스비 그림이 채움 */
+  background: none; color: #fff; /* 버튼 전체를 프리스비 그림이 채움 */
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -1040,3 +1040,21 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
   .features-sticky { height: auto; padding-bottom: 24px; } /* 고정 영역을 내용 높이만큼만 → 끝에서 고양이가 카드 바로 아래 이어짐 */
   .features-cat-m { display: block; width: 156px; height: auto; margin: 8px auto 0; padding-bottom: 32px; box-sizing: content-box; pointer-events: none; user-select: none; }
 }
+
+/* 프리스비 버튼 속도선 3개: 원의 왼쪽 아래에서 비스듬히 뻗어 나감 (참고 이미지 방향) */
+.floating-cta svg { position: relative; z-index: 1; border-radius: 50%; }
+.fc-line {
+  position: absolute; z-index: 0; height: 4px; border-radius: 4px;
+  background: #5fd08a; transform-origin: right center;
+  transform: translateY(-50%) rotate(-32deg);
+  animation: fc-line-dash 1.6s ease-in-out infinite;
+}
+/* 각 선의 오른쪽 끝을 원의 왼쪽 아래 테두리 바로 바깥에 두고, 왼쪽 아래로 나란히 뻗음 */
+.fc-line-1 { width: 22px; right: calc(100% + 2px); top: 38%; }
+.fc-line-2 { width: 30px; right: calc(92% + 2px); top: 60%; animation-delay: 0.15s; }
+.fc-line-3 { width: 20px; right: calc(78% + 2px); top: 80%; animation-delay: 0.3s; }
+@keyframes fc-line-dash {
+  0%, 100% { opacity: 0.9; translate: 0 0; }
+  50% { opacity: 0.45; translate: -3px 2px; } /* 살짝 뒤로 밀려나며 흐려짐 */
+}
+@media (prefers-reduced-motion: reduce) { .fc-line { animation: none; } }

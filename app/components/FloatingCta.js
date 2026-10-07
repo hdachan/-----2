@@ -20,6 +20,10 @@ export default function FloatingCta() {
         <circle cx="32" cy="32" r="5" fill="#006b3b" opacity="0.45" />
         <path d="M14 22a21 21 0 0 1 14-10" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.45" />
       </svg>
+      {/* 날아가는 느낌: 왼쪽 아래로 뻗은 속도선 3개 */}
+      <span className="fc-line fc-line-1" aria-hidden="true" />
+      <span className="fc-line fc-line-2" aria-hidden="true" />
+      <span className="fc-line fc-line-3" aria-hidden="true" />
     </a>
   );
 }
