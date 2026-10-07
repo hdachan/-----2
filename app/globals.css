@@ -1073,3 +1073,12 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
   100% { opacity: 0; scale: 1.4 1; }
 }
 @media (prefers-reduced-motion: reduce) { .fc-line, .floating-cta:hover .fc-line, .floating-cta:active .fc-line { animation: none; opacity: 0.9; scale: 1 1; } }
+
+/* 모바일 전용: 원근(z축) 프리스비를 천천히 (2.2초 → 3.6초), PC는 그대로
+   느려진 만큼(1.4초) 뒤따르는 프리스비 3개 출발도 함께 늦춤 */
+@media (max-width: 768px) {
+  .art-frisbee-intro { animation-duration: 3.6s; --fw: 120px; } /* 크기도 86px → 120px */
+  .art-frisbee-3, .headline-dog { animation-delay: 4.6s; }
+  .art-frisbee-2 { animation-delay: 7.1s, 0s; }
+  .art-frisbee:not(.art-frisbee-2):not(.art-frisbee-3) { animation-delay: 15.7s, 0s; }
+}
