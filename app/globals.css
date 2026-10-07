@@ -809,5 +809,18 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
   .hero-card-logo img { height: 30px; }
   .hero-headline { font-size: 26px; }
   .btn-wrap .btn { width: 195px; min-width: 0; height: 50px; font-size: 14px; }
+  .art-stetho { display: none; } /* 모바일에서는 청진기 그림 숨김 */
   .hero-sub { top: 13px; font-size: 13px; }
+}
+
+/* ===== 모바일 전용: 특장점 제목이 짧은 폰에서 잘리지 않도록 위쪽 여백 확보 (768px 이하만) =====
+   가운데 정렬 대신 위에서부터 배치 → 화면이 짧아도 제목이 상단바 뒤로 숨지 않음 */
+@media (max-width: 768px) {
+  .features-sticky { align-items: flex-start; padding-top: 28px; }
+  h2.features-title { font-size: 22px; margin-bottom: 16px; }
+  .feature-list { gap: 8px; }
+  .feature-head { padding: 16px 18px; font-size: 16px; }
+  .feature-card.is-open .feature-head { padding-bottom: 8px; }
+  .feature-points { padding: 0 18px 16px; }
+  .feature-points li { font-size: 14px; }
 }
