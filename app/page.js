@@ -1,6 +1,7 @@
 import Features from "./components/Features";
 import ContactCards from "./components/ContactCards";
 import DevTuner from "./components/DevTuner";
+import CoverageCopy from "./components/CoverageCopy";
 import CoverageDetail from "./components/CoverageDetail";
 
 export default function Home() {
@@ -72,53 +73,13 @@ export default function Home() {
         <Features />
       </section>
 
-      {/* 보장내용: 보상 기준 2가지(카드) + 보장 시작·제외 안내 */}
+      {/* 보장내용: 감성 카피(줄마다 흐릿 → 선명하게, 가운데 정렬) + 보상 예시·손해 드롭다운 3개 */}
       <section id="coverage" className="section coverage">
         <div className="container">
-          {/* 머리 부분: 일러스트 → 큰 제목 → 짧은 설명 (가운데 정렬) */}
+          <CoverageCopy />
+          {/* 카피와 보상 예시 사이: 잠자는 고양이 */}
           <div className="coverage-head">
             <img className="coverage-hero" src="/sleep_cat.png" alt="" aria-hidden="true" />
-            <h2 className="coverage-title">보장내용</h2>
-            <p className="coverage-lead">
-              하나의 질병(또는 상해)에 대하여 7백만원 한도 내에서 보상해요.
-              <br />
-              (연간 3천만원 한도)
-            </p>
-          </div>
-
-          {/* 요약 카드 3개: 핵심 숫자를 크게 보여줘 한눈에 "무엇을, 얼마나, 언제부터" 보장하는지 알 수 있게 */}
-          <div className="coverage-grid">
-            <div className="coverage-card">
-              <h3>질병과 상해를 보상해요.</h3>
-              <p className="coverage-rate">자부담금 3만원 보상비율 70%</p>
-              <p className="coverage-example">(예) 치료비 103만원 -3만원 × 70% =70만원</p>
-            </div>
-            <div className="coverage-card">
-              <h3>배상책임을 보상해요.</h3>
-              <p className="coverage-rate">배상책임 자부담금 3만원 보상비율 100%</p>
-              <p className="coverage-example">(예) 배상책임 103만원-3만원 × 100% =100만원</p>
-            </div>
-            <div className="coverage-card">
-              <h3>보장 시작</h3>
-              {/* 가입 후 상해는 보험기간 내 즉시 / 질병은 30일 슬고관절은 90일 이후 보상 */}
-              <ul className="coverage-steps">
-                <li>
-                  <strong>즉시</strong>상해
-                </li>
-                <li>
-                  <strong>30일</strong>질병
-                </li>
-                <li>
-                  <strong>90일</strong>슬고관절
-                </li>
-              </ul>
-              <ul className="coverage-notes">
-                <li>예방 목적의 검사 등은 보상하지 않아요.</li>
-                <li>
-                  자세한 내용은 <a href="/support/terms/">약관</a>을 확인하세요.
-                </li>
-              </ul>
-            </div>
           </div>
 
           {/* 보상 예시 + 보상하는 손해 / 보상하지 않는 손해 */}
