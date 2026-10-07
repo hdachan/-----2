@@ -1046,15 +1046,30 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
 .fc-line {
   position: absolute; z-index: 0; height: 4px; border-radius: 4px;
   background: #5fd08a; transform-origin: right center;
-  transform: translateY(-50%) rotate(-32deg);
-  animation: fc-line-dash 1.6s ease-in-out infinite;
+  translate: 0 -50%; rotate: -32deg; /* scale 이 선 방향(가로)으로만 늘어나도록 transform 대신 개별 속성 사용 */
+  opacity: 0; scale: 0 1;
+  animation: fc-streak 2.6s ease-out infinite; /* 평소: 가끔씩 쉭 나타났다 사라짐 */
 }
 /* 각 선의 오른쪽 끝을 원의 왼쪽 아래 테두리 바로 바깥에 두고, 왼쪽 아래로 나란히 뻗음 */
 .fc-line-1 { width: 22px; right: calc(100% + 2px); top: 38%; }
 .fc-line-2 { width: 30px; right: calc(92% + 2px); top: 60%; animation-delay: 0.15s; }
 .fc-line-3 { width: 20px; right: calc(78% + 2px); top: 80%; animation-delay: 0.3s; }
-@keyframes fc-line-dash {
-  0%, 100% { opacity: 0.9; translate: 0 0; }
-  50% { opacity: 0.45; translate: -3px 2px; } /* 살짝 뒤로 밀려나며 흐려짐 */
+/* 원 가장자리에서 뒤로 쭉 뻗어 나왔다가 꼬리부터 흐려지며 사라짐 → 앞 30%만 보이고 나머지는 쉼 */
+@keyframes fc-streak {
+  0% { opacity: 0; scale: 0 1; }
+  8% { opacity: 1; scale: 1 1; }
+  22% { opacity: 0.6; scale: 1.15 1; }
+  32%, 100% { opacity: 0; scale: 1.25 1; }
 }
-@media (prefers-reduced-motion: reduce) { .fc-line { animation: none; } }
+/* 마우스를 올리거나 손가락으로 누르는 동안: 쉬는 시간 없이 빠르게 연달아 → 날아가는 느낌 */
+.floating-cta:hover .fc-line, .floating-cta:active .fc-line, .floating-cta:focus-visible .fc-line {
+  animation: fc-streak-fast 0.55s ease-out infinite;
+}
+.floating-cta:hover .fc-line-2, .floating-cta:active .fc-line-2 { animation-delay: 0.12s; }
+.floating-cta:hover .fc-line-3, .floating-cta:active .fc-line-3 { animation-delay: 0.24s; }
+@keyframes fc-streak-fast {
+  0% { opacity: 0; scale: 0 1; }
+  30% { opacity: 1; scale: 1.1 1; }
+  100% { opacity: 0; scale: 1.4 1; }
+}
+@media (prefers-reduced-motion: reduce) { .fc-line, .floating-cta:hover .fc-line, .floating-cta:active .fc-line { animation: none; opacity: 0.9; scale: 1 1; } }

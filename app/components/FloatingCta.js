@@ -1,3 +1,5 @@
+"use client";
+
 // 오른쪽 아래 고정 버튼: 보험료 조회 및 가입 사이트로 이동 (모든 페이지)
 export const JOIN_URL = "https://cdsm.mdbins.com:8485/dsm/dvcphone/zcommon/b/DSMPZBAE400UM00.do?brth=2068650913";
 
@@ -10,6 +12,7 @@ export default function FloatingCta() {
       rel="noopener noreferrer"
       aria-label="보험료 조회 및 가입"
       title="보험료 조회 및 가입"
+      onTouchStart={() => {}} // 아이폰 사파리에서 누르는 동안(:active) 효과가 작동하도록
     >
       {/* 버튼 자체가 위에서 내려다본 프리스비: 두꺼운 테두리(림) + 안쪽 홈 + 빛 반사 */}
       <svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true">
