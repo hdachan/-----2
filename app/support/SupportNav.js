@@ -14,7 +14,6 @@ export function SupportBanner() {
   const current = useCurrent();
   return (
     <div className="support-banner">
-      <p>고객센터</p>
       <h1>{current.label}</h1>
     </div>
   );

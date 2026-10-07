@@ -36,7 +36,8 @@ export default function Home() {
             <h1 className="hero-headline">
               새로운 반려생활에{" "}
               <em className="headline-end">
-                타세요.
+                {/* 임시: "타" 글자 위 체크 표시 */}
+                <span className="ta-check">타</span>세요.
                 {/* 두 번째 프리스비: 글자 뒤로 날아와 "요." 끝에서 사라짐 → 오른쪽 강아지가 받아 문 것처럼 */}
                 <img className="art-frisbee art-frisbee-3" src="/pr.png" alt="" aria-hidden="true" />
                 {/* 타세요 오른쪽: 프리스비 무는 강아지 (absolute → 글자 위치에 영향 없음) */}
@@ -77,16 +78,16 @@ export default function Home() {
       <section id="coverage" className="section coverage">
         <div className="container">
           <CoverageCopy />
-          {/* 카피와 보상 예시 사이: 잠자는 고양이 */}
+          {/* 카피와 보상 예시 사이: 하트 고양이 (f_cat) */}
           <div className="coverage-head">
-            <img className="coverage-hero" src="/sleep_cat.png" alt="" aria-hidden="true" />
+            <img className="coverage-hero" src="/f_cat.png" alt="" aria-hidden="true" />
           </div>
 
           {/* 보상 예시 + 보상하는 손해 / 보상하지 않는 손해 */}
           <CoverageDetail />
         </div>
         {/* 섹션 아래 경계(푸터와 만나는 곳)에 걸쳐 앉은 고양이 */}
-        <img className="coverage-cat" src="/f_cat.png" alt="" aria-hidden="true" />
+        <img className="coverage-cat" src="/sleep_cat.png" alt="" aria-hidden="true" />
       </section>
     </>
   );

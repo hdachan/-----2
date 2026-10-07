@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { SUPPORT_MENU } from "../menu";
 import FaqList from "./FaqList";
+import NoticeList from "./NoticeList";
 import ClaimInfo from "./ClaimInfo";
 import TermsInfo, { RequiredNotices } from "./TermsInfo";
 import ContactCards from "../../components/ContactCards";
@@ -24,6 +25,17 @@ export default async function SupportPage({ params }) {
   const { slug } = await params;
   const item = SUPPORT_MENU.find((m) => m.slug === slug);
   if (!item) notFound();
+
+  if (slug === "notice") {
+    return (
+      <>
+        <div className="support-head">
+          <h2>공지사항</h2>
+        </div>
+        <NoticeList />
+      </>
+    );
+  }
 
   if (slug === "faq") {
     return (

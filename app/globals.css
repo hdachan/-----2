@@ -297,7 +297,7 @@ address { font-style: normal; }
   display: inline-block; /* rotate가 적용되려면 inline-block 필요 */
   margin-left: 6px; /* Animal과 살짝 띄움 */
   transform-origin: bottom center; /* 느낌표 하단 점을 축으로 설정 */
-  animation: tailWiggle 1.2s ease-in-out 1; /* 1.2초 동안 1회 실행 후 정지 */
+  animation: tailWiggleLoop 2.8s ease-in-out infinite; /* 1.2초 흔들고 1.6초 쉬고 무한 반복 */
 }
 @media (prefers-reduced-motion: reduce) {
   .tail-exclamation { animation: none; }
@@ -351,7 +351,7 @@ address { font-style: normal; }
 .coverage-cat {
   position: absolute; z-index: 5; right: max(24px, calc(50% - 540px)); bottom: 0;
   width: clamp(136px, 12vw, 200px); height: auto; /* 원래의 80% */
-  transform: translateY(32%);
+  transform: translateY(45%); /* 조금 더 아래로 */
   pointer-events: none; user-select: none;
 }
 .section.coverage .container { max-width: 1128px; } /* 1080 + 좌우 24 */
@@ -580,7 +580,7 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
   height: 220px; border-radius: 24px; background: #fce6f0; color: #4a4a4a; /* 연한 분홍 배경 + 짙은 회색 글씨 */ text-align: center;
 }
 .support-banner p { font-size: 15px; font-weight: 600; opacity: 0.85; }
-.support-banner h1 { margin-top: 2px; font-size: clamp(30px, 3vw, 44px); font-weight: 700; letter-spacing: -1px; line-height: 1.25; }
+.support-banner h1 { margin-top: 0; font-size: clamp(30px, 3vw, 44px); font-weight: 700; letter-spacing: -1px; line-height: 1.25; }
 .support-body { display: grid; grid-template-columns: 248px 1fr; gap: 80px; margin-top: 60px; }
 .support-nav ul { display: flex; flex-direction: column; gap: 6px; position: sticky; top: 88px; }
 .support-nav a {
@@ -773,32 +773,30 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
   .feature-points { padding-bottom: 20px; min-height: 0; }
 }
 
-/* ===== 모바일 전용: 첫 프리스비 원근 연출 (768px 이하만, PC에서는 숨김) =====
+/* ===== 첫 프리스비 원근 연출 (PC·모바일 공통) =====
    화면 앞쪽에서 크게 나타나 → 깊이(z축) 방향으로 멀어지며 작아지고 사라짐 (1회, 약 2.2초)
-   → 그 뒤 기존 프리스비 3개가 지금처럼 차례로 날아감 (출발 시간만 2.2초씩 늦춤) */
-.art-frisbee-intro { display: none; }
-@media (max-width: 768px) {
-  .hero { perspective: 600px; }
-  .art-frisbee-intro {
-    display: block; position: absolute; z-index: 3;
-    left: 50%; top: 38%; width: 23vw; height: auto;
-    margin-left: -11.5vw; pointer-events: none; user-select: none;
-    opacity: 0;
-    animation: frisbee-intro 2.2s ease-in 0.4s 1 both;
-  }
-  @keyframes frisbee-intro {
-    0%   { opacity: 0; transform: translate3d(-14vw, 16vh, 240px) rotateX(35deg); }
-    12%  { opacity: 1; }
-    28%  { transform: translate3d(-8vw, 10vh, 160px) rotateX(35deg); } /* 앞에서 크게 잠깐 머묾 */
-    80%  { opacity: 1; }
-    100% { opacity: 0; transform: translate3d(18vw, -22vh, -1400px) rotateX(35deg); }
-  }
-  .art-frisbee { animation-delay: 3.2s, 0s; }
-  .art-frisbee-2 { animation-delay: 11.8s, 0s; }
-  .art-frisbee-3 { animation-delay: 20.4s; }
-  .headline-dog { animation-delay: 20.4s; }
+   → 그 뒤 기존 프리스비 3개가 차례로 날아감 (출발 시간만 2.2초씩 늦춤) */
+.hero { perspective: 600px; }
+.art-frisbee-intro {
+  display: block; position: absolute; z-index: 3;
+  left: 50%; top: 38%; height: auto;
+  --fw: clamp(86px, 9vw, 160px); /* 모바일 약 86px, PC는 최대 160px */
+  width: var(--fw); margin-left: calc(var(--fw) / -2);
+  pointer-events: none; user-select: none;
+  opacity: 0;
+  animation: frisbee-intro 2.2s linear 0.4s 1 both; /* 멈춤 없이 일정한 속도로 멀어짐 */
 }
-@media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+@keyframes frisbee-intro {
+  0%   { opacity: 0; transform: translate3d(-14vw, 16vh, 240px) rotateX(35deg); }
+  12%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { opacity: 0; transform: translate3d(18vw, -22vh, -1400px) rotateX(35deg); }
+}
+.art-frisbee { animation-delay: 3.2s, 0s; }
+.art-frisbee-2 { animation-delay: 11.8s, 0s; }
+.art-frisbee-3 { animation-delay: 20.4s; }
+.headline-dog { animation-delay: 20.4s; }
+@media (prefers-reduced-motion: reduce) {
   .art-frisbee-intro { display: none; }
 }
 
@@ -932,3 +930,103 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
 /* 카피 아래 ~ 보상 예시 위: 잠자는 고양이 간격 */
 .coverage-copy + .coverage-head { margin: 72px 0 0; }
 .coverage-copy + .coverage-head .coverage-hero { margin-bottom: 0; }
+
+/* 느낌표 흔들기 반복용: 앞 43%(약 1.2초)만 흔들고 나머지는 멈춤 → 1.6초 텀 */
+@keyframes tailWiggleLoop {
+  0%, 43%, 100% { transform: rotate(0deg); }
+  8.6% { transform: rotate(18deg); }
+  17.2% { transform: rotate(-14deg); }
+  25.8% { transform: rotate(10deg); }
+  34.4% { transform: rotate(-5deg); }
+}
+
+/* 모바일 전용: 상단바 로고 조금 작게 (34px → 28px) */
+@media (max-width: 768px) {
+  .header-logo img { height: 28px !important; }
+}
+
+/* ===== 공지사항 본문 (가독성: 요약 → 쿠폰 카드 → 항목별 안내) ===== */
+.notice-date { display: block; margin-top: 4px; font-size: 13px; font-weight: 400; color: #999; }
+.notice-body { color: #4a4a4a; font-size: 15px; line-height: 1.75; }
+.notice-lead { margin: 0; word-break: keep-all; }
+.notice-lead strong { color: var(--primary); font-weight: 600; }
+.notice-coupons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 20px 0; }
+.notice-coupon {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 16px 18px; border-radius: 14px; background: #fff; border: 1px dashed var(--accent-pink);
+}
+.notice-coupon strong { font-size: 18px; font-weight: 600; color: #222; }
+.notice-coupon span { font-size: 13px; color: #777; }
+.notice-info { display: flex; flex-direction: column; gap: 10px; margin: 0; }
+.notice-info div { display: grid; grid-template-columns: 80px 1fr; gap: 12px; }
+.notice-info dt { font-weight: 600; color: #222; }
+.notice-info dd { margin: 0; word-break: keep-all; }
+.notice-info a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 768px) {
+  .notice-coupons { grid-template-columns: 1fr; }
+  .notice-info div { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* ===== 오른쪽 아래 고정 버튼: 보험료 조회 및 가입 (아이콘만) ===== */
+.floating-cta {
+  position: fixed; right: 24px; bottom: 24px; z-index: 900;
+  display: flex; align-items: center; justify-content: center;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: none; color: #fff; overflow: hidden; /* 버튼 전체를 프리스비 그림이 채움 */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.floating-cta:hover { transform: translateY(-3px) rotate(25deg); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22); }
+.floating-cta:focus-visible { outline: 3px solid var(--accent-pink); outline-offset: 3px; }
+@media (max-width: 768px) {
+  .floating-cta { right: 16px; bottom: 16px; width: 54px; height: 54px; }
+}
+
+/* ===== 공지사항 게시판 (목록 / 글 보기) ===== */
+.board-count { margin: 0 0 12px; font-size: 14px; color: #777; }
+.board-count strong { color: var(--primary); font-weight: 600; }
+.board-table { width: 100%; border-collapse: collapse; border-top: 2px solid #4a4a4a; font-size: 15px; }
+.board-table th { padding: 14px 8px; font-weight: 500; color: #4a4a4a; border-bottom: 1px solid #ddd; background: #fafafa; }
+.board-table td { padding: 18px 8px; border-bottom: 1px solid #eee; color: #4a4a4a; }
+.board-no { width: 72px; text-align: center; color: #999; }
+.board-date { width: 120px; text-align: center; color: #999; font-size: 14px; }
+.board-title { text-align: left; }
+.board-title button { padding: 0; border: 0; background: none; font: inherit; color: #222; text-align: left; cursor: pointer; }
+.board-title button:hover { text-decoration: underline; text-underline-offset: 3px; }
+.board-view { border-top: 2px solid #4a4a4a; }
+.board-view-head { padding: 22px 4px 18px; border-bottom: 1px solid #ddd; }
+.board-view-head h3 { margin: 0; font-size: 20px; font-weight: 600; color: #222; word-break: keep-all; }
+.board-meta { display: flex; gap: 14px; margin: 8px 0 0; font-size: 13px; color: #999; }
+.board-view-body { padding: 28px 4px 36px; border-bottom: 1px solid #ddd; }
+.board-view-foot { display: flex; justify-content: center; margin-top: 28px; }
+.board-btn { min-width: 120px; height: 46px; padding: 0 24px; border: 1px solid #ccc; border-radius: 999px; background: #fff; font: inherit; font-size: 15px; color: #4a4a4a; cursor: pointer; }
+.board-btn:hover { border-color: #4a4a4a; }
+@media (max-width: 768px) {
+  .board-table thead { display: none; }
+  .board-table tr { display: grid; grid-template-columns: 1fr; padding: 14px 4px; border-bottom: 1px solid #eee; }
+  .board-table td { padding: 0; border: 0; }
+  .board-table .board-no { display: none; }
+  .board-table .board-date { width: auto; margin-top: 6px; text-align: left; font-size: 13px; }
+  .board-view-head h3 { font-size: 18px; }
+}
+
+/* 임시: 제목 "타" 글자 위에 체크 표시 (글자 배치에는 영향 없음) */
+.ta-check { position: relative; display: inline-block; }
+.ta-check::before {
+  content: ""; position: absolute; left: 50%; bottom: 100%;
+  width: 0.21em; height: 0.12em; margin-bottom: 0.04em; /* 50% 크기 */
+  border-left: 0.045em solid var(--primary); border-bottom: 0.045em solid var(--primary);
+  border-radius: 0.02em;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+/* 프리스비 3개 출발 순서 변경 (원근 프리스비 코드는 그대로 두고 출발 시간만 덮어씀)
+   위에서부터 1번(.art-frisbee) · 2번(제목 뒤 .art-frisbee-3) · 3번(아래 .art-frisbee-2)
+   → 2번 → 3번 → 1번 순으로 출발 (20초 주기, 앞의 것이 끝나기 약 1초 전에 다음 출발) */
+.art-frisbee-3 { animation-delay: 3.2s; }           /* 2번: 원근 프리스비 뒤 가장 먼저 (3.5초 비행) */
+.headline-dog { animation-delay: 3.2s; }            /* 2번을 받는 강아지도 같은 타이밍 */
+.art-frisbee-2 { animation-delay: 5.7s, 0s; }       /* 3번: 2번이 끝나기 직전 출발 (9.6초 비행) */
+.art-frisbee:not(.art-frisbee-2):not(.art-frisbee-3) { animation-delay: 14.3s, 0s; } /* 1번: 마지막 */
+
+/* 보상하는/하지 않는 손해 하단 "약관" 링크 */
+.cv-foot a { color: inherit; text-decoration: underline; text-underline-offset: 3px; } /* 문장과 같은 분홍, 밑줄로만 링크 표시 */

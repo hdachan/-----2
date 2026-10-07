@@ -222,7 +222,7 @@ export default function CoverageDetail() {
               ))}
             </tbody>
           </table>
-          <p className="cv-foot">※ 자세한 내용은 약관을 참고하시기 바랍니다.</p>
+          <p className="cv-foot">※ 자세한 내용은 <a href="/support/terms/">약관</a>을 참고하시기 바랍니다.</p>
         </Dropdown>
 
         <Dropdown id="cv-not" title="보상하지 않는 손해">
@@ -231,7 +231,7 @@ export default function CoverageDetail() {
               <li key={t}>{t}</li>
             ))}
           </ol>
-          <p className="cv-foot">※ 자세한 내용은 약관을 참고하시기 바랍니다.</p>
+          <p className="cv-foot">※ 자세한 내용은 <a href="/support/terms/">약관</a>을 참고하시기 바랍니다.</p>
         </Dropdown>
       </div>
     </div>
