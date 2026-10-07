@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Fragment } from "react";
 
 const FEATURES = [
   {
@@ -9,7 +9,7 @@ const FEATURES = [
   },
   {
     // 제목 안 \n 은 줄바꿈으로 표시됨
-    title: "입원·수술·통원 상관없이\n1사고당 7백만원 한도 내 횟수제한이 없어요.(연간 3천만원)",
+    title: "입원·수술·통원 상관없이\n1사고당 7백만원 한도 내|횟수제한이 없어요.(연간 3천만원)",
     points: [
       "자부담금 3만원, 보상비율 70%",
       "가입기간 내 발생한 만성질환에 도움돼요.",
@@ -17,11 +17,11 @@ const FEATURES = [
     ],
   },
   {
-    title: "기다림은 짧게! 상해는 가입 즉시,\n질병은 30일, 슬·고관절 관련은 90일부터 보장",
+    title: "기다림은 짧게! 상해는 가입 즉시,\n질병은 30일, 슬·고관절 관련은|90일부터 보장",
     points: ["슬개골·고관절 대기기간이 짧아 일찍 보장해 안심이 돼요."],
   },
   {
-    title: "배상책임 3천만원까지 보상",
+    title: "배상책임 3천만원",
     points: ["자부담금 3만원, 보상비율 100%", "혹시 모를 사고(대인·대동물)에 든든하게 보장해요."],
   },
   {
@@ -131,7 +131,14 @@ function FeatureList({ open, onSelect }) {
               aria-controls={`feature-body-${i}`}
               onClick={() => onSelect(i)}
             >
-              {f.title}
+              {/* "|" 자리는 모바일에서만 줄바꿈 (PC에서는 띄어쓰기) */}
+              {f.title.split("|").map((part, j) => (
+                <Fragment key={j}>
+                  {j > 0 && <br className="m-br" />}
+                  {j > 0 && <span className="pc-space"> </span>}
+                  {part}
+                </Fragment>
+              ))}
             </button>
             <div className="feature-body" id={`feature-body-${i}`} role="region">
               <div className="feature-body-inner">

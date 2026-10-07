@@ -12,7 +12,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 body {
-  font-family: "Noto Sans KR", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-family: "Paperlogy", "Noto Sans KR", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   background: #fff; /* 1섹션·로고줄은 흰색, 이후 섹션은 각자 배경 지정 */
   color: var(--text);
   line-height: 1.6;
@@ -823,4 +823,77 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
   .feature-card.is-open .feature-head { padding-bottom: 8px; }
   .feature-points { padding: 0 18px 16px; }
   .feature-points li { font-size: 14px; }
+}
+
+/* 위치 조정기(개발용)로 특장점 설명 글자 크기를 바꿀 때 안쪽 줄에도 적용되게 함 */
+.feature-points[style*="font-size"] li { font-size: inherit; }
+
+/* 특장점 제목: 모바일에서만 줄바꿈 (PC는 기존처럼 띄어쓰기) */
+.m-br { display: none; }
+@media (max-width: 768px) {
+  .m-br { display: inline; }
+  .pc-space { display: none; }
+}
+
+/* 모바일 전용: 발자국을 위로 끌어올려 마지막 카드 아래쪽과 겹치게 (카드 위에 찍힘) */
+@media (max-width: 768px) {
+  /* 세로로: 1번 카드 ~ 마지막 카드 오른쪽 안쪽을 따라 위→아래로 찍힘 (카드가 펼쳐질 때마다 2개씩) */
+  .features-stage .paw-trail {
+    position: absolute; z-index: 2; top: 6px; bottom: 172px; left: auto; right: 14px; /* 아래 고양이(높이 136 + 여백 30) 위에서 끝남 */
+    flex-direction: column; justify-content: space-between;
+    width: 40px; height: auto; margin: 0; padding: 0;
+  }
+  .paw-trail .paw { transform: translateX(calc(var(--x) * 0.4)) rotate(calc(180deg + var(--r))) scale(0.4); }
+  .paw-trail .paw.is-on { transform: translateX(calc(var(--x) * 0.4)) rotate(calc(180deg + var(--r))) scale(1); }
+  .paw-trail .paw { fill: #4a4a4a; } /* 모바일 발자국 색: 짙은 회색 */
+}
+
+/* 모바일 전용: 책 읽는 고양이를 카드 목록 아래 가운데에 작게 표시 (PC 위치는 그대로) */
+@media (max-width: 768px) {
+  .features-stage .features-cat {
+    display: block; position: static; right: auto;
+    width: 156px; margin: 30px auto 0; /* 120% 크기, 조금 더 아래로 */
+  }
+}
+
+/* 페이퍼로지 6 SemiBold (눈누 무료 폰트, jsDelivr CDN) — 첫 화면 제목·특장점 제목에만 사용 */
+@font-face {
+  font-family: "Paperlogy";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2") format("woff2");
+  font-weight: 600 900; /* 굵게(700)·더 굵게도 SemiBold로 표시 (가짜 굵기 방지) */
+  font-style: normal;
+  font-display: swap;
+}
+.hero-headline, h2.features-title { font-family: "Paperlogy", "Noto Sans KR", sans-serif; font-weight: 600; }
+
+/* 페이퍼로지 3 Light — 첫 화면 제휴 표기·설명 문구에 사용 */
+@font-face {
+  font-family: "Paperlogy";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-3Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+.hero-eyebrow, .hero-sub { font-family: "Paperlogy", "Noto Sans KR", sans-serif; font-weight: 300; }
+
+/* 페이퍼로지 4 Regular (본문) · 5 Medium (중간 굵기) — 사이트 전체 기본 글꼴
+   굵기 매칭: 300 = 3 Light / 400 = 4 Regular / 500 = 5 Medium / 600 이상 = 6 SemiBold */
+@font-face {
+  font-family: "Paperlogy";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Paperlogy";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 모바일 전용: "이마트 몰리스 × DB손해보험"은 3 Light보다 한 단계 두꺼운 4 Regular */
+@media (max-width: 768px) {
+  .hero-eyebrow { font-weight: 400; }
 }

@@ -13,6 +13,18 @@ const TARGETS = [
   { key: "headline", label: "새로운 반려생활에 타세요.", selector: ".hero-headline" },
   { key: "sub", label: "특약포함 설계가 필요없는 원플랜", selector: ".hero-sub" },
   { key: "btn", label: "보험료 조회 및 가입 (버튼)", selector: ".btn-wrap .btn" },
+  // 특장점 카드 제목 ("왜 올라펫보험이어야 할까요?")
+  { key: "f1", label: "특장점 1 · 12세까지 가입", selector: ".feature-card:nth-child(1) .feature-head" },
+  { key: "f2", label: "특장점 2 · 입원·수술·통원 상관없이", selector: ".feature-card:nth-child(2) .feature-head" },
+  { key: "f3", label: "특장점 3 · 기다림은 짧게!", selector: ".feature-card:nth-child(3) .feature-head" },
+  { key: "f4", label: "특장점 4 · 배상책임 3천만원", selector: ".feature-card:nth-child(4) .feature-head" },
+  { key: "f5", label: "특장점 5 · 설계가 필요없는 원플랜", selector: ".feature-card:nth-child(5) .feature-head" },
+  // 특장점 카드 안 설명 (카드가 열려 있을 때만 보임)
+  { key: "f1b", label: "특장점 1 내용 · 12세까지 가입", selector: ".feature-card:nth-child(1) .feature-points" },
+  { key: "f2b", label: "특장점 2 내용 · 입원·수술·통원 상관없이", selector: ".feature-card:nth-child(2) .feature-points" },
+  { key: "f3b", label: "특장점 3 내용 · 기다림은 짧게!", selector: ".feature-card:nth-child(3) .feature-points" },
+  { key: "f4b", label: "특장점 4 내용 · 배상책임 3천만원", selector: ".feature-card:nth-child(4) .feature-points" },
+  { key: "f5b", label: "특장점 5 내용 · 설계가 필요없는 원플랜", selector: ".feature-card:nth-child(5) .feature-points" },
 ];
 
 const FIELDS = [
@@ -33,7 +45,7 @@ const deviceOf = (w) => (w <= 768 ? "mobile" : w <= 1024 ? "tablet" : "pc");
 const labelOf = (key) => DEVICES.find((d) => d.key === key).label;
 
 // 값을 기본값으로 코드에 반영할 때마다 버전을 올려서 조정기를 0으로 되돌림
-const STORAGE_KEY = "ola-dev-tuner-v8";
+const STORAGE_KEY = "ola-dev-tuner-v9";
 const EMPTY = { x: "", y: "", w: "", h: "", fs: "" };
 
 function loadSaved() {
@@ -75,7 +87,8 @@ function measure(selector) {
     top: Math.round(r.top + window.scrollY),
     width: Math.round(r.width),
     height: Math.round(r.height),
-    fs: el.tagName === "IMG" ? Math.round(r.height) : Math.round(parseFloat(getComputedStyle(el).fontSize)),
+    // 글자 크기: 로고는 그림 높이, 목록(특장점 내용)은 실제 글줄(li) 크기를 표시
+    fs: el.tagName === "IMG" ? Math.round(r.height) : Math.round(parseFloat(getComputedStyle(el.querySelector("li") || el).fontSize)),
     vw: window.innerWidth,
   };
 }

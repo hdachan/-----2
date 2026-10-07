@@ -28,7 +28,7 @@ const CONTACTS = [
   },
   {
     title: "메일문의",
-    desc: "csolapet@gmail.com",
+    desc: "1:1 메일로 문의하세요",
     href: "mailto:csolapet@gmail.com",
     icon: (
       <svg {...iconProps}>
