@@ -12,7 +12,6 @@ export default function Home() {
       <section className="hero">
         {/* 섹션 바닥에서 고양이·강아지가 고개를 내밀고 있는 모습 */}
         <div className="hero-art" aria-hidden="true">
-          <img className="art-bone" src="/bone.png" alt="" />
           <img className="art-cat" src="/ola_cat2.png" alt="" />
           <img className="art-dog" src="/ola_dog2.png" alt="" />
         </div>

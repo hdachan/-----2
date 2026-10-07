@@ -809,7 +809,7 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
   .hero-card-logo img { height: 30px; }
   .hero-headline { font-size: 26px; }
   .btn-wrap .btn { width: 195px; min-width: 0; height: 50px; font-size: 14px; }
-  .art-stetho { display: none; } /* 모바일에서는 청진기 그림 숨김 */
+  .art-stetho, .btn-wrap .art-clock { display: none; } /* 모바일에서는 청진기·시계 그림 숨김 */
   .hero-sub { top: 13px; font-size: 13px; }
 }
 
