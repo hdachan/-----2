@@ -560,10 +560,15 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
 .tuner-input { display: flex; align-items: center; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; }
 .tuner-input input { flex: 1; min-width: 0; width: 100%; padding: 6px 8px; border: 0; font: inherit; outline: none; }
 .tuner-input em { padding: 0 8px; font-style: normal; color: #888; background: #f4f4f4; align-self: stretch; display: flex; align-items: center; }
-.tuner-readout { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 12px; padding: 8px; border-radius: 8px; background: #f7f7f5; text-align: center; }
+.tuner-readout { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-top: 12px; padding: 8px; border-radius: 8px; background: #f7f7f5; text-align: center; }
 .tuner-readout dt { color: #888; font-size: 11px; }
 .tuner-readout dd { font-weight: 700; }
 .tuner-note { margin-top: 6px; font-size: 11px; color: #999; }
+.tuner-devices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; }
+.tuner-devices button { display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 6px 4px; border: 1px solid #ddd; border-radius: 8px; background: #fff; font: inherit; font-size: 13px; font-weight: 700; color: #4a4a4a; cursor: pointer; }
+.tuner-devices button small { font-size: 10px; font-weight: 400; color: #999; }
+.tuner-devices button.is-on { border-color: #008147; background: #e3f2ea; color: #006b3b; }
+.tuner-warn { margin: -4px 0 10px; font-size: 11px; line-height: 1.5; color: #ec6c1f; }
 .tuner-actions { display: flex; gap: 6px; margin-top: 10px; }
 .tuner-actions button { flex: 1; padding: 7px 4px; border: 1px solid #ccc; border-radius: 8px; background: #fff; font: inherit; font-size: 12px; cursor: pointer; }
 .tuner-actions .primary { background: #222; color: #fff; border-color: #222; }
@@ -766,4 +771,43 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
   .feature-head { padding-top: 18px; padding-bottom: 18px; font-size: 18px; }
   .feature-card.is-open .feature-head { padding-bottom: 10px; }
   .feature-points { padding-bottom: 20px; min-height: 0; }
+}
+
+/* ===== 모바일 전용: 첫 프리스비 원근 연출 (768px 이하만, PC에서는 숨김) =====
+   화면 앞쪽에서 크게 나타나 → 깊이(z축) 방향으로 멀어지며 작아지고 사라짐 (1회, 약 2.2초)
+   → 그 뒤 기존 프리스비 3개가 지금처럼 차례로 날아감 (출발 시간만 2.2초씩 늦춤) */
+.art-frisbee-intro { display: none; }
+@media (max-width: 768px) {
+  .hero { perspective: 600px; }
+  .art-frisbee-intro {
+    display: block; position: absolute; z-index: 3;
+    left: 50%; top: 38%; width: 23vw; height: auto;
+    margin-left: -11.5vw; pointer-events: none; user-select: none;
+    opacity: 0;
+    animation: frisbee-intro 2.2s ease-in 0.4s 1 both;
+  }
+  @keyframes frisbee-intro {
+    0%   { opacity: 0; transform: translate3d(-14vw, 16vh, 240px) rotateX(35deg); }
+    12%  { opacity: 1; }
+    28%  { transform: translate3d(-8vw, 10vh, 160px) rotateX(35deg); } /* 앞에서 크게 잠깐 머묾 */
+    80%  { opacity: 1; }
+    100% { opacity: 0; transform: translate3d(18vw, -22vh, -1400px) rotateX(35deg); }
+  }
+  .art-frisbee { animation-delay: 3.2s, 0s; }
+  .art-frisbee-2 { animation-delay: 11.8s, 0s; }
+  .art-frisbee-3 { animation-delay: 20.4s; }
+  .headline-dog { animation-delay: 20.4s; }
+}
+@media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+  .art-frisbee-intro { display: none; }
+}
+
+/* ===== 모바일 전용: 위치 조정기로 맞춘 첫 화면 문구 위치 (768px 이하만, PC는 그대로) ===== */
+@media (max-width: 768px) {
+  .hero-eyebrow { left: 3px; top: 15px; font-size: 10px; }
+  .hero-tagline { left: 0; top: -4px; font-size: 11px; }
+  .hero-card-logo img { height: 30px; }
+  .hero-headline { font-size: 26px; }
+  .btn-wrap .btn { width: 195px; min-width: 0; height: 50px; font-size: 14px; }
+  .hero-sub { top: 13px; font-size: 13px; }
 }

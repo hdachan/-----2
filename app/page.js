@@ -20,6 +20,8 @@ export default function Home() {
         <img className="art-frisbee" src="/pr.png" alt="" aria-hidden="true" />
         {/* 두 번째 프리스비: 아래쪽을 오른쪽에서 왼쪽으로 (첫 번째의 70% 크기) */}
         <img className="art-frisbee art-frisbee-2" src="/pr.png" alt="" aria-hidden="true" />
+        {/* 모바일 전용 첫 프리스비: 화면 앞에서 크게 나타나 멀리 날아가며 작아짐 (PC에서는 숨김) */}
+        <img className="art-frisbee-intro" src="/pr.png" alt="" aria-hidden="true" />
         <div className="hero-inner">
           {/* 브랜드 카드: 제휴 표기 → 로고 → 태그라인 → 메인 카피 → 설명 → 버튼 */}
           <div className="hero-card">
