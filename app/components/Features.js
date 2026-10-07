@@ -68,6 +68,7 @@ export default function Features() {
   };
 
   return (
+    <>
     <div
       ref={scrollRef}
       className="features-scroll"
@@ -88,6 +89,9 @@ export default function Features() {
         </div>
       </div>
     </div>
+    {/* 모바일 전용: 책 읽는 고양이를 고정 화면 밖(섹션 맨 아래)에 두어 스크롤 중 잘리지 않게 함 */}
+    <img className="features-cat-m" src="/book_cat_web.png" alt="" aria-hidden="true" />
+    </>
   );
 }
 

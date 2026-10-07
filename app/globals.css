@@ -350,7 +350,7 @@ address { font-style: normal; }
    오른쪽: 본문 영역(1080px) 오른쪽 끝에 맞춤, 푸터 회사정보 글씨에 닿지 않게 살짝만 걸침 */
 .coverage-cat {
   position: absolute; z-index: 5; right: max(24px, calc(50% - 540px)); bottom: 0;
-  width: clamp(136px, 12vw, 200px); height: auto; /* 원래의 80% */
+  width: clamp(110px, 9.6vw, 160px); height: auto; /* 이전 크기의 80% */
   transform: translateY(45%); /* 조금 더 아래로 */
   pointer-events: none; user-select: none;
 }
@@ -1030,3 +1030,13 @@ h2.features-title { text-align: center; font-size: clamp(24px, 2.4vw, 34px); col
 
 /* 보상하는/하지 않는 손해 하단 "약관" 링크 */
 .cv-foot a { color: inherit; text-decoration: underline; text-underline-offset: 3px; } /* 문장과 같은 분홍, 밑줄로만 링크 표시 */
+
+/* 모바일: 책 읽는 고양이를 고정 영역 밖으로 → 주소창이 접히거나 스크롤 끝에서 잘려 보이던 문제 해결
+   (고정 영역 안의 고양이는 숨기고, 발자국은 카드 끝까지) */
+.features-cat-m { display: none; }
+@media (max-width: 768px) {
+  .features-stage .features-cat { display: none; }
+  .features-stage .paw-trail { bottom: 6px; }
+  .features-sticky { height: auto; padding-bottom: 24px; } /* 고정 영역을 내용 높이만큼만 → 끝에서 고양이가 카드 바로 아래 이어짐 */
+  .features-cat-m { display: block; width: 156px; height: auto; margin: 8px auto 0; padding-bottom: 32px; box-sizing: content-box; pointer-events: none; user-select: none; }
+}
