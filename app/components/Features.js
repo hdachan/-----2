@@ -78,7 +78,7 @@ export default function Features() {
       <div className="features-sticky">
         <div className="container">
           <h2 className="features-title">
-            왜 <em>올라펫보험</em>이어야 할까요?
+            왜 <em>올라! 펫보험</em>이어야 할까요?
           </h2>
           <div className="features-stage">
             <FeatureList open={open} onSelect={goTo} />
